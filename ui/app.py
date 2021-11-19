@@ -7,6 +7,7 @@ from back import DataRetriever as dr
 from back import CriteriasManager
 
 from .overview import CriteraOverview
+from .experts import ExpertRatings
 
 
 class CriteriasApp(tk.Tk):
@@ -22,6 +23,8 @@ class CriteriasApp(tk.Tk):
         for i in range(len(criterias)):
             criterias[i] = self.crts.parse_criteria(criterias[i])
         self.crts.add_criteria(criterias)
+        self.crts.experts = dr.exp()
+        self.crts.analise_and_count()
 
         self.create_components()
         self.draw_components()
@@ -29,7 +32,7 @@ class CriteriasApp(tk.Tk):
     def create_components(self):
         self.sections = ttk.Notebook(self)
         self.tab1 = CriteraOverview(self)
-        self.tab2 = tk.Frame(self)
+        self.tab2 = ExpertRatings(self)
         self.tab3 = tk.Frame(self)
         self.tab4 = tk.Frame(self)
         self.sections.add(self.tab1, text=dr.ui()['main'][0])
@@ -61,7 +64,9 @@ class CriteriasApp(tk.Tk):
             self.tab1.add_criteria(crt)
 
     def update_experts_tab(self):
-        pass
+        self.tab2.clear_table()
+        for crt in self.crts.criterias:
+            self.tab2.add_criteria(crt)
 
     def change_lang(self):
         self.lang = self.languages[
