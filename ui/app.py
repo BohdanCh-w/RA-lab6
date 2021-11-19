@@ -17,14 +17,10 @@ class CriteriasApp(tk.Tk):
 
         self.lang = 'uk'
         self.languages = ['uk', 'en']
-        self.crts = CriteriasManager()
 
-        criterias = dr.crt()
-        for i in range(len(criterias)):
-            criterias[i] = self.crts.parse_criteria(criterias[i])
-        self.crts.add_criteria(criterias)
-        self.crts.experts = dr.exp()
-        self.crts.analise_and_count()
+        self.cm = CriteriasManager()
+        self.cm.get_mock_data()
+        self.cm.analise_and_count()
 
         self.create_components()
         self.draw_components()
@@ -60,13 +56,11 @@ class CriteriasApp(tk.Tk):
 
     def update_overview_tab(self):
         self.tab1.clear_table()
-        for crt in self.crts.criterias:
-            self.tab1.add_criteria(crt)
+        self.tab1.write_table(self.cm)
 
     def update_experts_tab(self):
         self.tab2.clear_table()
-        for crt in self.crts.criterias:
-            self.tab2.add_criteria(crt)
+        self.tab2.write_table(self.cm)
 
     def change_lang(self):
         self.lang = self.languages[

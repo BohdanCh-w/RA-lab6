@@ -16,11 +16,13 @@ class DataRetriever:
         cls.__ui = None
 
     @classmethod
-    def ui(cls):
+    def ui(cls, attr=None):
         if cls.__ui is None:
             with open(cls.ui_path, 'r', encoding='utf-8') as f:
                 cls.__ui = load(f)
-        return cls.__ui
+        if attr is None:
+            return cls.__ui
+        return cls.__ui[attr]
 
     @classmethod
     def crt(cls):
