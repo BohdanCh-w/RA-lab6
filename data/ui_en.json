@@ -1,0 +1,21 @@
+{
+    "ch_lang": "Українська",
+    "main": [
+        "Overview",
+        "Experts",
+        "Change",
+        "Graphs"
+    ],
+    "overview": {
+        "header": "Expert ratings by Criteria",
+        "table": {
+            "id": "#",
+            "name": "Criterias / Weights",
+            "ind": "Industry experts",
+            "usab": "Usability experts",
+            "prog": "Programming experts",
+            "user": "Users rates",
+            "avrg": "Average rates"
+        }
+    }
+}
