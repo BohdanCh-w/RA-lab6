@@ -7,7 +7,6 @@ from back import DataRetriever as dr
 from back import CriteriasManager
 
 from .overview import CriteraOverview
-from .experts import ExpertRatings
 
 
 class CriteriasApp(tk.Tk):
@@ -28,13 +27,11 @@ class CriteriasApp(tk.Tk):
     def create_components(self):
         self.sections = ttk.Notebook(self)
         self.tab1 = CriteraOverview(self)
-        self.tab2 = ExpertRatings(self)
+        self.tab2 = tk.Frame(self)
         self.tab3 = tk.Frame(self)
-        self.tab4 = tk.Frame(self)
         self.sections.add(self.tab1, text=dr.ui()['main'][0])
         self.sections.add(self.tab2, text=dr.ui()['main'][1])
         self.sections.add(self.tab3, text=dr.ui()['main'][2])
-        self.sections.add(self.tab4, text=dr.ui()['main'][3])
         self.sections.bind('<<NotebookTabChanged>>', self.on_tab_change)
 
         self.b_change_lang = tk.Button(self, text=dr.ui()['ch_lang'],
@@ -49,18 +46,12 @@ class CriteriasApp(tk.Tk):
         tab = event.widget.tab('current')['text']
         if tab == dr.ui()['main'][0]:
             self.update_overview_tab()
-        elif tab == dr.ui()['main'][1]:
-            self.update_experts_tab()
-        elif tab == dr.ui()['main'][3]:
+        elif tab == dr.ui()['main'][2]:
             self.update_graph_tab()
 
     def update_overview_tab(self):
         self.tab1.clear_table()
         self.tab1.write_table(self.cm)
-
-    def update_experts_tab(self):
-        self.tab2.clear_table()
-        self.tab2.write_table(self.cm)
 
     def change_lang(self):
         self.lang = self.languages[
