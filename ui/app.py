@@ -7,6 +7,7 @@ from back import DataRetriever as dr
 from back import CriteriasManager
 
 from .overview import CriteraOverview
+from .graph import CriteraGraph
 
 
 class CriteriasApp(tk.Tk):
@@ -28,7 +29,7 @@ class CriteriasApp(tk.Tk):
         self.sections = ttk.Notebook(self)
         self.tab1 = CriteraOverview(self)
         self.tab2 = tk.Frame(self)
-        self.tab3 = tk.Frame(self)
+        self.tab3 = CriteraGraph(self, self.cm)
         self.sections.add(self.tab1, text=dr.ui()['main'][0])
         self.sections.add(self.tab2, text=dr.ui()['main'][1])
         self.sections.add(self.tab3, text=dr.ui()['main'][2])
